@@ -211,17 +211,86 @@ public void onBreak(BlockBreakEvent e){
 
 ---
 
-## 13. Practice mini-project
+## 13. Practice projects
 
-Build a **/home** system:
+### 3 Simple Mini-Plugins (Pick 1 or All 3)  
 
-1. Command tree: `/home set`, `/home tp`, `/home list`.
-2. Store homes in a SQL table keyed by `UUID`.
-3. Async load on join, cache in a map.
-4. Use `teleportAsync` with a small cooldown.
-5. Show feedback with MiniMessage: `<green>Teleported <yellow>{name}</yellow>`.
+#### **1. BlockLogger**  
+**Purpose**: Log when players break specific blocks (e.g., diamonds, ancient debris).  
+**Code snippets**:  
+```java
+// Listener
+@EventHandler
+public void onBreak(BlockBreakEvent e) {
+    if (e.getBlock().getType() == Material.DIAMOND_ORE) {
+        plugin.getLogger().info(e.getPlayer().getName() + " mined diamonds!");
+    }
+}
 
-Ship that and you will have touched 80 % of what real plugins need.
+// Config.yml
+logged_blocks: ["DIAMOND_ORE", "ANCIENT_DEBRIS"]
+```  
+**Skills**: Event handling, config parsing, basic logging.  
+
+---
+
+#### **2. PlayerTrails**  
+**Purpose**: Leave a particle trail behind players when they walk. Toggle with `/trail on/off`.  
+**Code snippets**:  
+```java
+// Command
+if (args[0].equals("on")) {
+    player.sendActionBar(Component.text("Trails enabled", NamedTextColor.GREEN));
+    plugin.getComponent(TrailService.class).enableTrail(player);
+}
+
+// TrailService
+public void enableTrail(Player p) {
+    Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        p.getWorld().spawnParticles(Particle.FIREWORKS_SPARK, p.getLocation(), 10);
+    }, 0, 20L);
+}
+```  
+**Skills**: Command registration, particle API, task scheduling.  
+
+---
+
+#### **3. WeatherAlert**  
+**Purpose**: Warn players when a storm starts in their world.  
+**Code snippets**:  
+```java
+// Event
+@EventHandler
+public void onStorm(WeatherChangeEvent e) {
+    if (e.toWeatherState() == WeatherState.STORM) {
+        e.getWorld().getPlayers().forEach(p -> 
+            p.sendMessage(MiniMessage.miniMessage().deserialize(
+                "<red>Storm incoming! Take cover.</red>"
+            ))
+        );
+    }
+}
+
+// Config
+alert_delay_seconds: 30
+```  
+**Skills**: World events, message formatting, config tuning.  
+
+---
+
+### Those too easy? Try: **MazeRunner**  
+**Still simple, but more advanced**:  
+1. Command `/maze` → Generates a random 10x10 maze at a safe location.  
+2. Player must solve it within 60 seconds to win rewards.  
+3. Use `teleportAsync()` to send them to the maze.  
+4. Track progress via a `Map<Player, Location>` cache.  
+5. Send a GUI menu to choose maze difficulty (easy/medium/hard).  
+
+**Skills**: Async teleports, GUI handling, timer logic, config-based rewards.  
+
+--- 
+
+These projects teach **event hooks**, **command flow**, **particle effects**, and **async safety** without requiring ORM or complex data systems. Ship one, and you’ll already know more than most plugin devs.
 
 ---
 

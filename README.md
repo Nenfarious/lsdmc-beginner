@@ -1,6 +1,6 @@
 ### Paper API 1.21.4+ – A hands-on starter kit for Java devs
 
-You already write Java. These notes fill the Minecraft-specific gaps so you can compile something useful **today** and avoid newbie pitfalls.
+Since you already write Java. These notes fill the Minecraft-specific gaps so you can compile something useful **today** and avoid newbie pitfalls.
 
 ---
 

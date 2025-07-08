@@ -1,6 +1,6 @@
-### Paper API 1.21.4+ – A hands-on PaperAPI starter kit for Java devs
+### Paper API 1.21.4+ – A hands-on starter kit for Java devs
 
-If you already write Java. These notes fill the Minecraft-specific gaps so you can compile something useful **today** and avoid newbie pitfalls.
+You already write Java. These notes fill the Minecraft-specific gaps so you can compile something useful **today** and avoid newbie pitfalls.
 
 ---
 
@@ -18,7 +18,7 @@ gradle wrapper --gradle-version 8.8
 
 ```kotlin
 plugins {
-    id("io.papermc.paperweight.userdev") version "2.0.0-SNAPSHOT" // latest userdev ([github.com](https://github.com/PaperMC/paperweight/releases/))
+    id("io.papermc.paperweight.userdev") version "2.0.0-SNAPSHOT" // latest userdev ([github.com](https://github.com/PaperMC/paperweight/releases))
 }
 ```
 
@@ -137,7 +137,7 @@ ticket.set(Component.key("display_name"),
            Component.text("Dungeon Ticket", NamedTextColor.GOLD));
 ```
 
-Components survive version jumps, unlike old NBT tricks. Guides: ([docs.papermc.io](https://docs.papermc.io/paper/dev/api/?utm_source=chatgpt.com), [docs.papermc.io](https://docs.papermc.io/paper/dev/))
+Components survive version jumps, unlike old NBT tricks. Guides: ([docs.papermc.io](https://docs.papermc.io/paper/dev/api/), [docs.papermc.io](https://docs.papermc.io/paper/dev/))
 
 ---
 
